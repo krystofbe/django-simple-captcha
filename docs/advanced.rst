@@ -97,17 +97,24 @@ Required for the ``word_challenge`` challenge function only. Points a file conta
 
 Defaults to: ``'/usr/share/dict/words'``
 
-CAPTCHA_FLITE_PATH
+CAPTCHA_ESPEAK_PATH
 ------------------------
 
-Full path to the ``flite`` executable. When defined, will automatically add audio output to the captcha.
+Full path to the ``eSpeak`` executable. When defined, will automatically add audio output to the captcha.
 
 Defaults to: ``None`` (no audio output)
+
+CAPTCHA_ESPEAK_LANGUAGE
+------------------------
+
+Option for the eSpeak language e.g. like ``-vde`` for german
+
+Defaults to: ``None`` (no language selected )
 
 CAPTCHA_SOX_PATH
 ------------------------
 
-Full path to the ``sox`` executable. If audio output is enabled via ``CAPTCHA_FLITE_PATH``, the generated output audio file is identical across multiple generations (unlike CAPTCHA images which get different random noise each time they are rendered). User appleorange1_ has shown_ that this could be used to pre-generate a "rainbow-table" of all possible input strings and a hash of the generated output soundfile, thus rendering an attack on audio CAPTCHAs trivial.
+Full path to the ``sox`` executable. If audio output is enabled via ``CAPTCHA_ESPEAK_PATH``, the generated output audio file is identical across multiple generations (unlike CAPTCHA images which get different random noise each time they are rendered). User appleorange1_ has shown_ that this could be used to pre-generate a "rainbow-table" of all possible input strings and a hash of the generated output soundfile, thus rendering an attack on audio CAPTCHAs trivial.
 
 If sox_ is installed and used via this settings, random brown noise is injected into the generated audio file, rendering attacks via a rainbow table impossible.
 

@@ -27,7 +27,8 @@ CAPTCHA_WORDS_DICTIONARY = getattr(
     settings, "CAPTCHA_WORDS_DICTIONARY", "/usr/share/dict/words"
 )
 CAPTCHA_PUNCTUATION = getattr(settings, "CAPTCHA_PUNCTUATION", """_"',.;:-""")
-CAPTCHA_FLITE_PATH = getattr(settings, "CAPTCHA_FLITE_PATH", None)
+CAPTCHA_ESPEAK_PATH = getattr(settings, "CAPTCHA_ESPEAK_PATH", None)
+CAPTCHA_ESPEAK_LANGUAGE = getattr(settings, "CAPTCHA_ESPEAK_LANGUAGE", "")
 CAPTCHA_SOX_PATH = getattr(settings, "CAPTCHA_SOX_PATH", None)
 CAPTCHA_TIMEOUT = getattr(settings, "CAPTCHA_TIMEOUT", 5)  # Minutes
 CAPTCHA_LENGTH = int(getattr(settings, "CAPTCHA_LENGTH", 4))  # Chars

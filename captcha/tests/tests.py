@@ -60,9 +60,10 @@ class CaptchaCase(TestCase):
             )
         for helper in tested_helpers:
             challenge, response = settings._callable_from_string(helper)()
-            self.stores[
-                helper.rsplit(".", 1)[-1].replace("_challenge", "_store")
-            ], _ = CaptchaStore.objects.get_or_create(
+            (
+                self.stores[helper.rsplit(".", 1)[-1].replace("_challenge", "_store")],
+                _,
+            ) = CaptchaStore.objects.get_or_create(
                 challenge=challenge, response=response
             )
         challenge, response = settings.get_challenge()()
@@ -91,7 +92,7 @@ class CaptchaCase(TestCase):
             )
 
     def test_audio(self):
-        if not settings.CAPTCHA_FLITE_PATH:
+        if not settings.CAPTCHA_ESPEAK_PATH:
             return
         for key in (
             self.stores.get("math_store").hashkey,

@@ -138,7 +138,7 @@ def captcha_image(request, key, scale=1):
 
 
 def captcha_audio(request, key):
-    if settings.CAPTCHA_FLITE_PATH:
+    if settings.CAPTCHA_ESPEAK_PATH:
         try:
             store = CaptchaStore.objects.get(hashkey=key)
         except CaptchaStore.DoesNotExist:
@@ -151,7 +151,15 @@ def captcha_audio(request, key):
         else:
             text = ", ".join(list(text))
         path = str(os.path.join(tempfile.gettempdir(), "%s.wav" % key))
-        subprocess.call([settings.CAPTCHA_FLITE_PATH, "-t", text, "-o", path])
+        subprocess.call(
+            [
+                settings.CAPTCHA_ESPEAK_PATH,
+                settings.CAPTCHA_ESPEAK_LANGUAGE,
+                text,
+                "-w",
+                path,
+            ]
+        )
 
         # Add arbitrary noise if sox is installed
         if settings.CAPTCHA_SOX_PATH:
@@ -163,7 +171,7 @@ def captcha_audio(request, key):
                 [
                     settings.CAPTCHA_SOX_PATH,
                     "-r",
-                    "8000",
+                    "22050",
                     "-n",
                     arbnoisepath,
                     "synth",
@@ -211,7 +219,7 @@ def captcha_refresh(request):
         "key": new_key,
         "image_url": captcha_image_url(new_key),
         "audio_url": captcha_audio_url(new_key)
-        if settings.CAPTCHA_FLITE_PATH
+        if settings.CAPTCHA_ESPEAK_PATH
         else None,
     }
     return HttpResponse(json.dumps(to_json_response), content_type="application/json")

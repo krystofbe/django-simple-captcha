@@ -80,7 +80,8 @@ if django.VERSION >= (2, 2):
         "django.contrib.messages.middleware.MessageMiddleware",
     )
 
-CAPTCHA_FLITE_PATH = os.environ.get("CAPTCHA_FLITE_PATH", None)
+CAPTCHA_ESPEAK_PATH = os.environ.get("CAPTCHA_ESPEAK_PATH", None)
+CAPTCHA_ESPEAK_LANGUAGE = "-vde"
 CAPTCHA_SOX_PATH = os.environ.get("CAPTCHA_SOX_PATH", None)
 CAPTCHA_BACKGROUND_COLOR = "transparent"
 # CAPTCHA_BACKGROUND_COLOR = '#ffffffff'

@@ -86,7 +86,7 @@ class BaseCaptchaTextInput(MultiWidget):
     def audio_url(self):
         return (
             reverse("captcha-audio", kwargs={"key": self._key})
-            if settings.CAPTCHA_FLITE_PATH
+            if settings.CAPTCHA_ESPEAK_PATH
             else None
         )
 
